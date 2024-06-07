@@ -1,62 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <meta charset="UTF-8">
     <title>All users</title>
-    <style>
-        table.iksweb {
-            text-decoration: none;
-            border-collapse: collapse;
-            width: auto;
-            text-align: center;
-        }
-        table.iksweb th {
-            font-weight: normal;
-            font-size: 20px;
-            color: #ffffff;
-            background-color: #2c7ebf;
-        }
-        table.iksweb td {
-            font-size: 15px;
-            color: #354251;
-            padding: 10px;
-            line-height: 15px;
-            vertical-align: middle;
-            border: 1px solid #070707;
-        }
-        table.iksweb tr:hover {
-            background-color: #f9fafb;
-        }
-        table.iksweb tr:hover td {
-            color: #354251;
-            cursor: default;
-        }
-    </style>
+
 </head>
 <body>
 <h1>Users</h1>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${tableList}">
-            <td th:text="${user.firstName}"></td>
-            <td th:text="${user.lastName}"></td>
+<table>
+    </thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+    </tr>
+
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
             <td th:text="${user.email}"></td>
             <td>
-                <form th:action="@{/edit}">
-                    <button type="submit" th:name="id" th:value="${user.id}">EDIT</button>
+                <form th:action="@{/users/update}">
+                    <button type="submit" th:name="id" th:value="${user.id}">UPDATE</button>
                 </form>
-                <form th:action="@{/delete}">
+                <td>
+                <td>
+                <form method="post" th:action="@{/users/delete}">
                     <button type="submit" th:name="id" th:value="${user.id}"  >DELETE</button>
                 </form>
             </td>
         </tr>
+</tr>
         </tbody>
     </table>
-</div>
-<div align="center">
-    <br>
-    <br>
-    <input type="button" value="Add" onclick="window.location.href = 'new'">
-</div>
+<a href="/users/addUser">Create user</a>
 </body>
 </html>
